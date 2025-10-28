@@ -1,0 +1,108 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- Header Section -->
+  <view class="header fade-in">
+    <view class="hero-section">
+      <text class="hero-title">Digit Recognition</text>
+      <text class="hero-subtitle">AI-powered handwritten digit recognition</text>
+    </view>
+  </view>
+
+  <!-- Stats Section -->
+  <view class="stats-section fade-in">
+    <view class="card">
+      <view class="card-title">System Status</view>
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-value">{{modelsCount}}</text>
+          <text class="stat-label">Trained Models</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value {{systemStatus === 'Online' ? 'text-success' : 'text-danger'}}">
+            {{systemStatus}}
+          </text>
+          <text class="stat-label">ML Service</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{bestAccuracy}}%</text>
+          <text class="stat-label">Best Accuracy</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Active Model Section -->
+  <view class="model-section fade-in" wx:if="{{activeModel}}">
+    <view class="card">
+      <view class="card-title">Active Model</view>
+      <view class="model-info">
+        <view class="info-row">
+          <text class="info-label">Name:</text>
+          <text class="info-value">{{activeModel.modelName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">Accuracy:</text>
+          <text class="info-value">{{(activeModel.accuracy * 100).toFixed(2)}}%</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">Epochs:</text>
+          <text class="info-value">{{activeModel.epochs}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">Created:</text>
+          <text class="info-value">{{formatDate(activeModel.createdAt)}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Features Section -->
+  <view class="features-section fade-in">
+    <view class="card">
+      <view class="card-title">Features</view>
+      <view class="features-list">
+        <view class="feature-item">
+          <view class="feature-icon">🎨</view>
+          <view class="feature-content">
+            <text class="feature-title">Draw & Recognize</text>
+            <text class="feature-desc">Draw digits and get instant AI recognition</text>
+          </view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-icon">🧠</view>
+          <view class="feature-content">
+            <text class="feature-title">AI Powered</text>
+            <text class="feature-desc">Powered by deep learning CNN models</text>
+          </view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-icon">⚡</view>
+          <view class="feature-content">
+            <text class="feature-title">Real-time</text>
+            <text class="feature-desc">Fast and accurate real-time recognition</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Action Buttons -->
+  <view class="actions-section fade-in">
+    <view class="action-buttons">
+      <button class="btn btn-primary" bindtap="navigateToDraw">
+        Start Drawing
+      </button>
+      <button class="btn btn-secondary" bindtap="refreshStatus">
+        Refresh Status
+      </button>
+    </view>
+  </view>
+
+  <!-- Loading -->
+  <view wx:if="{{loading}}" class="loading-overlay">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">Loading...</text>
+    </view>
+  </view>
+</view>

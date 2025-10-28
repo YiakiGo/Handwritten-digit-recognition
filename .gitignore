@@ -1,0 +1,61 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+bin/
+build/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+*.sqlite
+*.h2.db
+
+# ML Models (don't commit large model files)
+models/*.h5
+!models/current_model.h5
+models/archived/
+
+# Datasets (don't commit large dataset files)
+datasets/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Application properties (sensitive data)
+application-prod.properties

@@ -1,0 +1,268 @@
+/* pages/draw/draw.wxss */
+.header {
+  padding: 40rpx 0 30rpx 0;
+  text-align: center;
+}
+
+.page-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  padding: 30rpx;
+}
+
+.digit-canvas {
+  width: 500rpx;
+  height: 500rpx;
+  background: black;
+  border-radius: 20rpx;
+  border: 3rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.3);
+}
+
+.canvas-instructions {
+  text-align: center;
+  margin-top: 20rpx;
+}
+
+.canvas-instructions text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.controls-section {
+  margin: 30rpx 0;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30rpx;
+}
+
+.control-buttons .btn {
+  min-width: 200rpx;
+}
+
+.result-content {
+  margin-top: 20rpx;
+}
+
+.prediction-section {
+  text-align: center;
+  margin-bottom: 40rpx;
+  padding: 30rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15rpx;
+}
+
+.prediction-label {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20rpx;
+}
+
+.predicted-digit {
+  display: block;
+  font-size: 120rpx;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 15rpx;
+  text-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.3);
+}
+
+.confidence {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.probabilities-title {
+  display: block;
+  font-size: 32rpx;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 25rpx;
+}
+
+.probabilities-list {
+  margin-top: 20rpx;
+}
+
+.prob-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 15rpx 0;
+}
+
+.digit-label {
+  width: 60rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: white;
+}
+
+.prob-bar-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.prob-bar {
+  flex: 1;
+  height: 30rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.prob-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+  border-radius: 15rpx;
+  transition: width 0.5s ease;
+}
+
+.prob-bar-max {
+  background: linear-gradient(90deg, #2196F3, #1976D2);
+}
+
+.prob-value {
+  width: 100rpx;
+  font-size: 24rpx;
+  color: white;
+  text-align: right;
+  font-weight: 500;
+}
+
+.model-details {
+  margin-top: 20rpx;
+}
+
+.model-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.model-detail:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: white;
+  font-weight: 500;
+}
+
+.warning-content {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  text-align: center;
+}
+
+.warning-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.warning-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #ffa726;
+  line-height: 1.4;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-content {
+  background: white;
+  padding: 60rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  min-width: 300rpx;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 6rpx solid #f3f3f3;
+  border-top: 6rpx solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 30rpx;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Button disabled state */
+button[disabled] {
+  opacity: 0.6;
+  transform: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 750rpx) {
+  .digit-canvas {
+    width: 400rpx;
+    height: 400rpx;
+  }
+  
+  .control-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .control-buttons .btn {
+    width: 80%;
+  }
+  
+  .predicted-digit {
+    font-size: 100rpx;
+  }
+}

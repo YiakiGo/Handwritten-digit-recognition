@@ -1,0 +1,110 @@
+<!-- pages/draw/draw.wxml -->
+<view class="container">
+  <!-- Header -->
+  <view class="header">
+    <text class="page-title">Draw & Recognize</text>
+    <text class="page-subtitle">Draw a digit (0-9) and get AI recognition</text>
+  </view>
+
+  <!-- Drawing Canvas -->
+  <view class="canvas-section">
+    <view class="card">
+      <view class="card-title">Drawing Canvas</view>
+      <view class="canvas-container">
+        <canvas 
+          canvas-id="digitCanvas"
+          class="digit-canvas"
+          disable-scroll="true"
+          bindtouchstart="onTouchStart"
+          bindtouchmove="onTouchMove"
+          bindtouchend="onTouchEnd"
+          bindtouchcancel="onTouchEnd"
+        ></canvas>
+      </view>
+      <view class="canvas-instructions">
+        <text>Draw a single digit (0-9) in the center</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Canvas Controls -->
+  <view class="controls-section">
+    <view class="control-buttons">
+      <button class="btn btn-secondary" bindtap="clearCanvas">
+        Clear
+      </button>
+      <button class="btn btn-primary" bindtap="recognizeDigit" disabled="{{!isDrawingReady}}">
+        Recognize
+      </button>
+    </view>
+  </view>
+
+  <!-- Recognition Results -->
+  <view class="results-section" wx:if="{{recognitionResult}}">
+    <view class="card">
+      <view class="card-title">Recognition Result</view>
+      <view class="result-content">
+        <view class="prediction-section">
+          <text class="prediction-label">Predicted Digit:</text>
+          <text class="predicted-digit">{{recognitionResult.predicted_digit}}</text>
+          <text class="confidence">
+            Confidence: {{(recognitionResult.confidence * 100).toFixed(2)}}%
+          </text>
+        </view>
+
+        <view class="probabilities-section">
+          <text class="probabilities-title">Probabilities:</text>
+          <view class="probabilities-list">
+            <view class="prob-item" wx:for="{{recognitionResult.probabilities}}" wx:key="digit">
+              <text class="digit-label">{{item.digit}}:</text>
+              <view class="prob-bar-container">
+                <view class="prob-bar">
+                  <view 
+                    class="prob-bar-fill {{item.isMax ? 'prob-bar-max' : ''}}"
+                    style="width: {{item.percentage}}%"
+                  ></view>
+                </view>
+                <text class="prob-value">{{item.percentage}}%</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Model Info -->
+  <view class="model-info-section" wx:if="{{activeModel}}">
+    <view class="card">
+      <view class="card-title">Active Model</view>
+      <view class="model-details">
+        <view class="model-detail">
+          <text class="detail-label">Name:</text>
+          <text class="detail-value">{{activeModel.modelName}}</text>
+        </view>
+        <view class="model-detail">
+          <text class="detail-label">Accuracy:</text>
+          <text class="detail-value">{{(activeModel.accuracy * 100).toFixed(2)}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- No Active Model Warning -->
+  <view class="warning-section" wx:if="{{!activeModel}}">
+    <view class="card">
+      <view class="warning-content">
+        <text class="warning-icon">⚠️</text>
+        <text class="warning-text">No active model available. Please train a model first.</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Loading Overlay -->
+  <view wx:if="{{recognizing}}" class="loading-overlay">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">Recognizing...</text>
+    </view>
+  </view>
+</view>
