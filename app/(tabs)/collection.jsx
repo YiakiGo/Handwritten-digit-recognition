@@ -1,47 +1,60 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function Collection() {
+  const router = useRouter();
+
   const collections = [
     {
       id: '1',
-      name: 'Meeting Notes',
-      text: 'Team meeting agenda',
-      image: 'https://via.placeholder.com/150x100/000000/ffffff?text=Handwriting+1',
+      name: 'Test 1',
+      text: '2',
+      image: 'https://via.placeholder.com/300x200/000000/ffffff?text=Handwriting+Sample+1',
       date: '2024-01-15',
       confidence: 94,
       recognitionTime: '1.2s'
     },
     {
       id: '2',
-      name: 'Lecture Notes',
-      text: 'Physics lecture summary',
-      image: 'https://via.placeholder.com/150x100/000000/ffffff?text=Handwriting+2',
-      date: '2024-01-14',
+      name: 'Test 2',
+      text: '6',
+      image: 'https://via.placeholder.com/300x200/000000/ffffff?text=Handwriting+Sample+2',
+      date: '2025-11-14',
       confidence: 89,
       recognitionTime: '0.8s'
     },
     {
       id: '3',
-      name: 'Personal Journal',
-      text: 'Daily reflection',
-      image: 'https://via.placeholder.com/150x100/000000/ffffff?text=Handwriting+3',
-      date: '2024-01-13',
+      name: 'Test 3',
+      text: '9',
+      image: 'https://via.placeholder.com/300x200/000000/ffffff?text=Handwriting+Sample+3',
+      date: '2025-11-13',
       confidence: 96,
       recognitionTime: '1.5s'
     },
     {
       id: '4',
-      name: 'Shopping Lists',
-      text: 'Groceries for the week',
-      image: 'https://via.placeholder.com/150x100/000000/ffffff?text=Handwriting+4',
-      date: '2024-01-12',
+      name: 'Test 4',
+      text: '1',
+      image: 'https://via.placeholder.com/300x200/000000/ffffff?text=Handwriting+Sample+4',
+      date: '2025-11-12',
       confidence: 91,
       recognitionTime: '0.9s'
     },
   ];
 
+  const handleCollectionPress = (item) => {
+    router.push({
+      pathname: '/result-detail',
+      params: { result: JSON.stringify(item) }
+    });
+  };
+
   const renderCollection = ({ item }) => (
-    <TouchableOpacity style={styles.collectionItem}>
+    <TouchableOpacity
+      style={styles.collectionItem}
+      onPress={() => handleCollectionPress(item)}
+    >
       <Image source={{ uri: item.image }} style={styles.collectionImage} />
       <View style={styles.collectionInfo}>
         <Text style={styles.collectionName}>{item.name}</Text>

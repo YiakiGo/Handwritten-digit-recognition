@@ -44,6 +44,20 @@ export default function RootLayout() {
             presentation: 'card'
           }}
         />
+        <Stack.Screen
+          name="about"
+          options={{
+            title: 'About Team',
+            presentation: 'card'
+          }}
+        />
+        <Stack.Screen
+          name="result-detail"
+          options={{
+            title: 'Result Details',
+            presentation: 'card'
+          }}
+        />
       </Stack>
     </>
   );

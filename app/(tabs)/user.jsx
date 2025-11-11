@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export default function User() {
   const user = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
+    name: 'Ming',
+    email: 'ming@example.com',
     joinDate: 'January 2024',
     recognitionCount: 156,
   };

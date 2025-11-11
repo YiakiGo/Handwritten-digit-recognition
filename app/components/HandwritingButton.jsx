@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Animated, View } from 'react-native';
 
 export default function HandwritingButton({
   title,

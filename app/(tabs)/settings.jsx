@@ -1,7 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity, Switch } from 'react-native';
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 
 export default function Settings() {
+  const router = useRouter();
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
   const [autoSync, setAutoSync] = useState(false);
@@ -46,13 +48,6 @@ export default function Settings() {
       <View style={styles.content}>
         <SettingsSection title="Preferences">
           <SettingsRow
-            title="Notifications"
-            subtitle="Get notified about recognition results"
-            hasSwitch
-            value={notifications}
-            onValueChange={setNotifications}
-          />
-          <SettingsRow
             title="Dark Mode"
             subtitle="Use dark theme throughout the app"
             hasSwitch
@@ -60,23 +55,8 @@ export default function Settings() {
             onValueChange={setDarkMode}
           />
           <SettingsRow
-            title="Auto Sync"
-            subtitle="Automatically sync with cloud"
-            hasSwitch
-            value={autoSync}
-            onValueChange={setAutoSync}
-          />
-        </SettingsSection>
-
-        <SettingsSection title="Recognition">
-          <SettingsRow
-            title="Recognition Language"
+            title="Application Language"
             subtitle="English (US)"
-            onPress={() => {}}
-          />
-          <SettingsRow
-            title="Recognition Speed"
-            subtitle="Balanced"
             onPress={() => {}}
           />
           <SettingsRow
@@ -94,27 +74,16 @@ export default function Settings() {
             value={analytics}
             onValueChange={setAnalytics}
           />
-          <SettingsRow
-            title="Privacy Policy"
-            onPress={() => {}}
-          />
-          <SettingsRow
-            title="Terms of Service"
-            onPress={() => {}}
-          />
         </SettingsSection>
 
-        <SettingsSection title="Support">
+        <SettingsSection title="About">
           <SettingsRow
-            title="Help Center"
-            onPress={() => {}}
+            title="About Team"
+            subtitle="Meet the developers"
+            onPress={() => router.push('/about')}
           />
           <SettingsRow
-            title="Contact Support"
-            onPress={() => {}}
-          />
-          <SettingsRow
-            title="About"
+            title="App Version"
             subtitle="Version 1.0.0"
             onPress={() => {}}
           />

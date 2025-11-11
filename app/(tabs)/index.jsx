@@ -1,9 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, Alert, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState, useRef } from 'react';
 import HandwritingCanvas from '../components/HandwritingCanvas';
-import HandwritingButton from '../components/HandwritingButton';
-import ScribblyText from '../components/ScribblyText';
 
 export default function Home() {
   const router = useRouter();
@@ -35,7 +33,6 @@ export default function Home() {
       // Simulate recognition process
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Mock recognition result
       const mockResult = {
         recognizedText: "This is a sample of handwritten text that has been processed by our AI recognition system.",
         confidence: 94,
@@ -46,7 +43,6 @@ export default function Home() {
         bounds: canvasData.bounds
       };
 
-      // Navigate to result page with the recognition data
       router.push({
         pathname: '/result',
         params: { result: JSON.stringify(mockResult) }
@@ -65,23 +61,18 @@ export default function Home() {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* Header */}
       <View style={styles.header}>
-        <ScribblyText variant="title" size="giant" scribbly={true}>
-          ✎ Written.ai
-        </ScribblyText>
-        <ScribblyText variant="secondary" size="large" scribbly={true}>
-          ✨ Your Personal Handwriting Assistant ✨
-        </ScribblyText>
+        <Text style={styles.title}>Written.ai</Text>
+        <Text style={styles.subtitle}>AI-Powered Handwriting Recognition</Text>
       </View>
 
+      {/* Main Content */}
       <View style={styles.content}>
+        {/* Handwriting Canvas Section */}
         <View style={styles.writingSection}>
-          <ScribblyText variant="accent" size="large" scribbly={true}>
-            📝 Write Here
-          </ScribblyText>
-          <ScribblyText variant="muted" size="medium" scribbly={true}>
-            Use your finger or stylus to write naturally!
-          </ScribblyText>
+          <Text style={styles.sectionTitle}>Write Here</Text>
+          <Text style={styles.hintText}>Use your finger or stylus to write naturally</Text>
 
           <View style={styles.canvasContainer}>
             <HandwritingCanvas
@@ -89,64 +80,38 @@ export default function Home() {
               onCanvasReady={handleCanvasReady}
               style={styles.canvas}
             />
-            <View style={styles.canvasDecorations}>
-              <Text style={styles.cornerDoodle}>✨</Text>
-              <Text style={styles.cornerDoodleRight}>🌟</Text>
-            </View>
           </View>
         </View>
 
-        <View style={styles.actionSection}>
-          <HandwritingButton
-            title="✕ Clear"
+        {/* Action Buttons */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, styles.clearButton]}
             onPress={handleClear}
-            variant="secondary"
-            size="medium"
             disabled={isRecognizing}
-          />
+            activeOpacity={0.7}
+          >
+            <Text style={styles.clearButtonText}>Clear</Text>
+          </TouchableOpacity>
 
-          <HandwritingButton
-            title={isRecognizing ? "Thinking..." : "✓ Recognize"}
+          <TouchableOpacity
+            style={[styles.button, styles.recognizeButton, isRecognizing && styles.buttonDisabled]}
             onPress={handleRecognize}
-            variant="primary"
-            size="medium"
             disabled={isRecognizing}
-            icon={isRecognizing ? "🤔" : "✨"}
-          />
+            activeOpacity={0.7}
+          >
+            <Text style={styles.recognizeButtonText}>
+              {isRecognizing ? "Processing..." : "Recognize"}
+            </Text>
+          </TouchableOpacity>
         </View>
 
-        <View style={styles.tipsSection}>
-          <ScribblyText variant="ink" size="medium" scribbly={true}>
-            💡 Pro Tips:
-          </ScribblyText>
-          <View style={styles.tipItem}>
-            <Text style={styles.tipEmoji}>🎯</Text>
-            <ScribblyText variant="secondary" size="small" scribbly={true}>
-              Write slowly for better recognition
-            </ScribblyText>
-          </View>
-          <View style={styles.tipItem}>
-            <Text style={styles.tipEmoji}>✨</Text>
-            <ScribblyText variant="secondary" size="small" scribbly={true}>
-              Use your natural handwriting style
-            </ScribblyText>
-          </View>
-        </View>
-
-        <View style={styles.quickActions}>
-          <HandwritingButton
-            title="📚 My Collections"
-            onPress={() => router.push('/collection')}
-            variant="cute"
-            size="small"
-          />
-
-          <HandwritingButton
-            title="🗄️ Database"
-            onPress={() => router.push('/database')}
-            variant="scribbly"
-            size="small"
-          />
+        {/* Instructions */}
+        <View style={styles.instructions}>
+          <Text style={styles.instructionTitle}>How to use:</Text>
+          <Text style={styles.instructionText}>1. Write text in the box above</Text>
+          <Text style={styles.instructionText}>2. Tap "Recognize" to process</Text>
+          <Text style={styles.instructionText}>3. View results on the next screen</Text>
         </View>
       </View>
     </ScrollView>
@@ -156,88 +121,106 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF8F0', // Paper cream color
+    backgroundColor: '#FFFFFF',
   },
   header: {
     paddingHorizontal: 24,
-    paddingVertical: 32,
+    paddingVertical: 24,
     alignItems: 'center',
-    backgroundColor: '#FFF8F0',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#000000',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#666666',
+    textAlign: 'center',
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     paddingVertical: 24,
-    backgroundColor: '#FFF8F0',
   },
   writingSection: {
-    marginBottom: 32,
-    alignItems: 'center',
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#000000',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  hintText: {
+    fontSize: 14,
+    color: '#666666',
+    textAlign: 'center',
+    marginBottom: 16,
   },
   canvasContainer: {
-    position: 'relative',
-    marginTop: 16,
+    marginBottom: 0,
   },
   canvas: {
-    marginBottom: 0,
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    borderWidth: 3,
-    borderColor: '#D4B996',
-    borderStyle: 'dotted',
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#000000',
     overflow: 'hidden',
   },
-  canvasDecorations: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    pointerEvents: 'none',
-  },
-  cornerDoodle: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    fontSize: 20,
-    color: '#FFD93D',
-    opacity: 0.7,
-  },
-  cornerDoodleRight: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    fontSize: 20,
-    color: '#FFD93D',
-    opacity: 0.7,
-  },
-  actionSection: {
+  buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 32,
-    paddingHorizontal: 8,
+    gap: 12,
   },
-  tipsSection: {
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 24,
-    borderWidth: 2,
-    borderColor: '#FFE5E5',
-    borderStyle: 'dashed',
-  },
-  tipItem: {
-    flexDirection: 'row',
+  button: {
+    flex: 1,
+    paddingVertical: 16,
+    borderRadius: 8,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  clearButton: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 2,
+    borderColor: '#000000',
+  },
+  recognizeButton: {
+    backgroundColor: '#000000',
+  },
+  buttonDisabled: {
+    opacity: 0.5,
+  },
+  clearButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#000000',
+  },
+  recognizeButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
+  },
+  instructions: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 8,
+    padding: 16,
+  },
+  instructionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#000000',
     marginBottom: 8,
   },
-  tipEmoji: {
-    fontSize: 18,
-    marginRight: 12,
-  },
-  quickActions: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 16,
+  instructionText: {
+    fontSize: 14,
+    color: '#333333',
+    lineHeight: 20,
+    marginBottom: 4,
   },
 });
