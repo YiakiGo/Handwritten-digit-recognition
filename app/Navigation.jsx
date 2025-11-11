@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './Home';
-import Collection from './Collection';
-import User from './User';
-import Settings from './Settings';
-import SignIn from './SignIn';
-import Result from './Result';
-import Database from './Database';
+import Home from './main/Screens/Home.js';
+import Collection from './main/Screens/Collection.js';
+import User from './main/Screens/User';
+import Settings from './main/Screens/Settings';
+import SignIn from './main/Screens/SignIn';
+import Result from './main/Screens/Result';
+import Database from './main/Screens/Database';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
