@@ -9,6 +9,8 @@ dist/
 web-build/
 expo-env.d.ts
 
+*.md
+
 # Native
 .kotlin/
 *.orig.*
@@ -37,6 +39,7 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
 
 # generated native folders
 /ios

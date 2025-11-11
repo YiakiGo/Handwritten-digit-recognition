@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global monochrome styles */
+:root {
+  --mono-black: #000000;
+  --mono-white: #ffffff;
+  --mono-gray-50: #fafafa;
+  --mono-gray-100: #f5f5f5;
+  --mono-gray-200: #e5e5e5;
+  --mono-gray-300: #d4d4d4;
+  --mono-gray-400: #a3a3a3;
+  --mono-gray-500: #737373;
+  --mono-gray-600: #525252;
+  --mono-gray-700: #404040;
+  --mono-gray-800: #262626;
+  --mono-gray-900: #171717;
+}
+
+/* Dark mode by default */
+body {
+  background-color: var(--mono-black);
+  color: var(--mono-white);
+}
+
+/* Custom monochrome utility classes */
+.bg-mono-gradient {
+  background: linear-gradient(135deg, var(--mono-gray-900) 0%, var(--mono-black) 100%);
+}
+
+.bg-mono-gradient-light {
+  background: linear-gradient(135deg, var(--mono-gray-800) 0%, var(--mono-gray-900) 100%);
+}
+
+.text-mono-gradient {
+  background: linear-gradient(135deg, var(--mono-white) 0%, var(--mono-gray-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-mono-gradient {
+  border-image: linear-gradient(135deg, var(--mono-gray-600) 0%, var(--mono-gray-800) 100%) 1;
+}
+
+/* Component styles */
+.mono-button {
+  @apply bg-mono-white text-mono-black font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+}
+
+.mono-button:hover {
+  @apply bg-mono-gray-100;
+}
+
+.mono-button-secondary {
+  @apply bg-mono-gray-800 text-mono-white font-semibold py-3 px-6 rounded-lg border border-mono-gray-600 transition-all duration-200;
+}
+
+.mono-button-secondary:hover {
+  @apply bg-mono-gray-700;
+}
+
+.mono-card {
+  @apply bg-mono-gray-900 border border-mono-gray-700 rounded-xl p-6;
+}
+
+.mono-input {
+  @apply bg-mono-gray-900 border border-mono-gray-600 text-mono-white rounded-lg px-4 py-3;
+}
+
+.mono-input:focus {
+  @apply border-mono-white outline-none;
+}
+
+.mono-textarea {
+  @apply bg-mono-gray-900 border border-mono-gray-600 text-mono-white rounded-lg px-4 py-3 resize-none;
+}
+
+.mono-textarea:focus {
+  @apply border-mono-white outline-none;
+}
+
+/* Status indicators */
+.mono-status-success {
+  @apply text-green-400;
+}
+
+.mono-status-warning {
+  @apply text-yellow-400;
+}
+
+.mono-status-error {
+  @apply text-red-400;
+}
+
+.mono-status-info {
+  @apply text-blue-400;
+}
+
+/* Typography */
+.mono-heading-1 {
+  @apply text-4xl font-bold text-mono-white;
+}
+
+.mono-heading-2 {
+  @apply text-3xl font-bold text-mono-white;
+}
+
+.mono-heading-3 {
+  @apply text-2xl font-bold text-mono-white;
+}
+
+.mono-body-large {
+  @apply text-lg text-mono-white;
+}
+
+.mono-body {
+  @apply text-base text-mono-white;
+}
+
+.mono-body-small {
+  @apply text-sm text-mono-gray-300;
+}
+
+.mono-caption {
+  @apply text-xs text-mono-gray-400;
+}
+
+/* Animations */
+@keyframes mono-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mono-animate-fade-in {
+  animation: mono-fade-in 0.3s ease-out;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--mono-gray-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mono-gray-600);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mono-gray-500);
+}
+
+/* Selection styles */
+::selection {
+  background-color: var(--mono-gray-600);
+  color: var(--mono-white);
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--mono-white);
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.mono-loading {
+  @apply animate-pulse bg-mono-gray-800;
+}
+
+/* Disabled states */
+.mono-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Hover effects */
+.mono-hover-lift {
+  transition: transform 0.2s ease-out;
+}
+
+.mono-hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Border radius utilities */
+.mono-rounded-sm { border-radius: 4px; }
+.mono-rounded { border-radius: 8px; }
+.mono-rounded-md { border-radius: 12px; }
+.mono-rounded-lg { border-radius: 16px; }
+.mono-rounded-xl { border-radius: 20px; }
+.mono-rounded-2xl { border-radius: 24px; }
+.mono-rounded-full { border-radius: 9999px; }
+
+/* Shadow utilities for depth */
+.mono-shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.05);
+}
+
+.mono-shadow {
+  box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
+}
+
+.mono-shadow-md {
+  box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -2px rgba(255, 255, 255, 0.05);
+}
+
+.mono-shadow-lg {
+  box-shadow: 0 20px 25px -5px rgba(255, 255, 255, 0.1), 0 10px 10px -5px rgba(255, 255, 255, 0.04);
+}
+
+/* Transition utilities */
+.mono-transition {
+  transition: all 0.2s ease-out;
+}
+
+.mono-transition-slow {
+  transition: all 0.3s ease-out;
+}
+
+.mono-transition-fast {
+  transition: all 0.1s ease-out;
+}
